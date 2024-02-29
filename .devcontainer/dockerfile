@@ -1,0 +1,58 @@
+ARG nodeversion=18
+
+# step 1 - get base image
+FROM ubuntu:20.04
+ARG nodeversion
+# step 2 - get latest registry
+RUN apt-get update
+# step 3 - install curl
+RUN apt install -y curl
+# step 4 - get Node 14 install script
+#RUN curl -sL "https://deb.nodesource.com/setup_$nodeversion.x" -o "setup_$nodeversion.sh"
+RUN curl -fsSL https://deb.nodesource.com/setup_$nodeversion.x | bash -
+# step 5 - run Node 14 script (adds to registry)
+#RUN sh "./setup_$nodeversion.sh"
+# step 6 - download dotnet core package
+RUN curl -sL  https://packages.microsoft.com/config/ubuntu/20.04/packages-microsoft-prod.deb -o packages-microsoft-prod.deb
+# step 7 - add dotnet core package to registry
+RUN dpkg -i packages-microsoft-prod.deb
+# step 8 - download azure functions core tools v3 package
+RUN curl https://packages.microsoft.com/keys/microsoft.asc | gpg --dearmor > microsoft.gpg
+# step 9 - move azure functions core tools v3 package
+RUN mv microsoft.gpg /etc/apt/trusted.gpg.d/microsoft.gpg
+# step 10 - add azure functions core tools v3 package to registry
+#RUN sh -c 'echo "deb [arch=amd64] https://packages.microsoft.com/repos/microsoft-ubuntu-$(lsb_release -cs)-prod $(lsb_release -cs) main" > /etc/apt/sources.list.d/dotnetdev.list'
+# step 11 - update registry
+RUN apt-get update
+# step 12 - install node 14
+RUN apt install -y \
+    nodejs \
+    powershell \
+    zip unzip
+# step 13 - install azure functions core tools
+RUN apt-get install azure-functions-core-tools-4
+# step 14 - install https transports 
+RUN apt-get install -y apt-transport-https
+# step 15 - install dotnet 
+RUN apt-get install -y dotnet-sdk-6.0
+# step 16 - install git
+RUN apt install -y git
+# step 17 - install version of NPM
+RUN npm install -g npm@6.14.17
+# step 18 - install wget for cert management
+RUN apt install -y wget
+
+# step 19 - config GIT to use existing windows git credential manager
+RUN git config --global credential.helper "/mnt/c/Program\ Files/Git/mingw64/libexec/git-core/git-credential-manager-core.exe"
+RUN git config --global credential.usehttppath true
+## step 17 - download git credential manager core package
+#RUN curl -sL https://github.com/microsoft/Git-Credential-Manager-Core/releases/download/v2.0.567/gcmcore-linux_amd64.2.0.567.18224.deb -o gmccore.deb
+## step 18 - install git credential manager core
+#RUN dpkg -i gmccore.deb
+## step 19 - configure git credential manager core
+#RUN git-credential-manager-core configure
+# entry point
+#COPY /usr/bin/wslvar /usr/bin/wslvar
+
+RUN echo whoami > name.txt
+ENTRYPOINT bash

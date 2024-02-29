@@ -1,0 +1,31 @@
+{
+    "name": "Existing Dockerfile",
+    "service": "dipdemo",
+    "dockerComposeFile": "docker-compose.yml",
+    "settings": {},
+    "extensions": [
+        "ms-vscode.vscode-node-azure-pack",
+        "ms-azuretools.vscode-azurefunctions",
+        "ms-vsliveshare.vsliveshare",
+        "fabiospampinato.vscode-terminals",
+        "ms-vscode.powershell",
+        "kavod-io.vscode-jest-test-adapter"
+    ],
+    "forwardPorts": [
+        80,
+        3001,
+        4000,
+        4001,
+        3006
+    ],
+    "remoteEnv": {
+        "USERNAME": ""
+    },
+    "runServices": [
+        "dipdemo"
+    ],
+    "shutdownAction": "stopCompose",
+
+    "initializeCommand": "cd ${localWorkspaceFolder} && npm run local-getUserInputs"
+   // "postCreateCommand": "cd ${localWorkspaceFolder} && npm run setup-local"
+}

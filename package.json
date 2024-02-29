@@ -1,0 +1,12 @@
+{
+    "name": "DIPDemo",
+    "version": "0.0.1",
+    "description": "",
+    "author": "",
+    "private": true,
+    "license": "UNLICENSED",
+    "scripts": {
+      "local-getUserInputs": "cd ./.devcontainer/LocalDeploymentAutomation && npm ci && npm run getUserInputs && npm run cloneRepo"
+    }
+  }
+  

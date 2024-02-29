@@ -1,0 +1,26 @@
+version: '3.8'
+
+services:
+  dipdemo:
+    build: 
+      context: .
+      dockerfile: dockerfile
+      args:
+          - nodeversion=18
+    image: dipdemo-dev-demo:local
+    stdin_open: true
+    tty: true
+    environment:
+      - USERNAME=$(whoami)
+      - NODE_TLS_REJECT_UNAUTHORIZED=0
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+
+    # Overrides default command so things don't shut down after the process ends.1`
+    command: tail -f /dev/null
+    ports:
+      - "80:80"         #web testing
+      - "3001:3001"     #web api
+      - "4000:4000"     #web portal
+      - "4001:4001"     #web portal
+      - "3006:3006"     #portal api     

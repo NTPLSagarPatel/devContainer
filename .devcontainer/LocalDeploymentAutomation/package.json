@@ -1,0 +1,19 @@
+{
+  "name": "localdeploymentautomation",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "getUserInputs": "node get-user-inputs.js",
+    "cloneRepo": "node cloneRepository.js",
+    "start": "npm run welcomeLog.js",
+    "welcomeText": "npm run welcomeLog.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "dotenv": "^10.0.0",
+    "ms-rest-azure": "^3.0.1",
+    "azure-arm-resource": "^7.4.0"
+  }
+}
