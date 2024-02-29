@@ -14,16 +14,16 @@ async function multiLineCI() {
         console.log(`Cloning into ${platformApiRepoPath} started...`);
         child_process.execSync(`git clone https://github.com/NTPLSagarPatel/platformApi.git  ${platformApiRepoPath}`);
     }else {
-        // console.log(`Pulling changes into ${platformApiRepoPath} started...`);
-        // child_process.execSync(`cd ${platformApiRepoPath} && git pull origin ${branch} --rebase`);
+        console.log(`Pulling changes into ${platformApiRepoPath} started...`);
+        child_process.execSync(`cd ${platformApiRepoPath} && git pull origin ${branch} --rebase`);
     }
 
     if (!fs.existsSync(webApiRepoPath)) {
         console.log(`Cloning into ${webApiRepoPath} started...`);
         child_process.execSync(`git clone https://github.com/NTPLSagarPatel/webapi.git  ${webApiRepoPath}`);
     }else {
-        // console.log(`Pulling changes into ${webApiRepoPath} started...`);
-        // child_process.execSync(`cd ${webApiRepoPath} && git pull origin ${branch} --rebase`);
+        console.log(`Pulling changes into ${webApiRepoPath} started...`);
+        child_process.execSync(`cd ${webApiRepoPath} && git pull origin ${branch} --rebase`);
     }
 
     CLI.close()
